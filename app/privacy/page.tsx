@@ -1,0 +1,5 @@
+export const metadata = { title: "Privacy notice — Digitics" };
+
+export default function Privacy() {
+  return <main className="mx-auto max-w-2xl px-5 py-12"><h1 className="text-4xl font-extrabold">Privacy notice</h1><p className="mt-5 text-white/75">Placeholder copy for review: Digitics will use application information to review internship applications, communicate about the application, and administer the internship where applicable.</p><p className="mt-4 text-white/75">We will not use your information for unrelated marketing without an appropriate legal basis. Contact details for requests and retention periods still need to be confirmed.</p><p className="mt-8 rounded-xl border border-y/40 bg-y/10 p-4 text-sm text-y">TODO: This placeholder must be reviewed and replaced with approved legal text before launch.</p></main>;
+}

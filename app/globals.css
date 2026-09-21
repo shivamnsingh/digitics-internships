@@ -1,0 +1,35 @@
+@tailwind base;@tailwind components;@tailwind utilities;
+html{scroll-behavior:smooth}
+html,body{overflow-x:hidden}
+body{scroll-padding-bottom:calc(5rem + env(safe-area-inset-bottom))}
+body{background:#000;color:#F4F2EA;font-family:'Instrument Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+h1,h2,h3,.display{font-family:'Bricolage Grotesque','Instrument Sans',system-ui,sans-serif;letter-spacing:-.035em;line-height:.95}
+@layer components{
+ .btn{@apply inline-flex items-center justify-center rounded-full px-6 py-3 font-semibold transition duration-200 active:scale-[.97] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-y disabled:opacity-40 disabled:pointer-events-none}
+ .btn-y{@apply btn bg-y text-black hover:bg-white}
+ .btn-o{@apply btn border border-white/25 hover:border-y hover:text-y}
+ .input{@apply w-full min-h-11 rounded-xl bg-white/5 border border-white/15 px-4 py-3 text-base outline-none transition focus:border-y focus:ring-2 focus:ring-y/30 placeholder:text-white/30}
+ .chip{@apply inline-flex min-h-11 cursor-pointer select-none items-center rounded-full border border-white/20 px-4 py-2 text-sm transition hover:border-y has-[:checked]:border-y has-[:checked]:bg-y has-[:checked]:font-semibold has-[:checked]:text-black has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-y}
+ .glass{@apply rounded-3xl border border-white/10 bg-white/[.04] backdrop-blur-md}
+}
+@keyframes play{from{left:0}to{left:100%}}
+.playhead-auto{animation:play 10s linear infinite}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+/* custom cursor */
+html.has-cursor *{cursor:none!important}
+html.has-cursor input,html.has-cursor textarea,html.has-cursor select{cursor:auto!important}
+html.has-cursor input[type=checkbox],html.has-cursor input[type=radio],html.has-cursor input[type=file]{cursor:pointer!important}
+.cursor-ring{margin:-18px 0 0 -18px}
+.cursor-body{display:grid;place-items:center;width:36px;height:36px;border-radius:9999px;border:1.5px solid #FCD739;transition:transform .25s cubic-bezier(.2,.8,.2,1),background-color .25s,width .25s,height .25s,margin .25s}
+.cursor-ring[data-mode=link] .cursor-body{transform:scale(1.5);background:rgba(252,215,57,.18)}
+.cursor-ring[data-mode=label] .cursor-body{width:84px;height:84px;margin:-24px 0 0 -24px;background:#FCD739}
+.cursor-ring.cursor-down .cursor-body{transform:scale(.8)}
+.cursor-label{font:600 12px 'Instrument Sans',sans-serif;color:#000;opacity:0;transition:opacity .2s}
+.cursor-ring[data-mode=label] .cursor-label{opacity:1}
+/* hero extras */
+.spotlight{background:radial-gradient(520px circle at var(--mx,70%) var(--my,20%),rgba(252,215,57,.13),transparent 60%)}
+@keyframes drawline{from{stroke-dashoffset:200}to{stroke-dashoffset:0}}
+.draw{stroke-dasharray:200;animation:drawline 2.2s .4s ease-out both}
+@keyframes marquee{to{transform:translateX(-50%)}}
+.marquee{animation:marquee 32s linear infinite}
+@keyframes blink{50%{opacity:.2}}.rec{animation:blink 1.4s steps(1) infinite}

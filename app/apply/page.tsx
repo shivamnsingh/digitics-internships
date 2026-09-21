@@ -1,0 +1,4 @@
+import { Suspense } from "react"; import Logo from "@/components/Logo"; import ApplyForm from "@/components/ApplyForm"; import { getIntake } from "@/lib/db";
+export const metadata = { title: "Apply — Digitics Internships" };
+export const dynamic = "force-dynamic";
+export default async function Apply() { const intake = await getIntake(), closed = !intake.open || !!(intake.deadline && intake.deadline < new Date().toISOString().slice(0, 10)); return (<><header className="border-b border-white/10 px-5 py-3"><div className="mx-auto max-w-2xl"><Logo h={34} /></div></header>{closed ? <main className="mx-auto max-w-xl px-5 py-20"><h1 className="text-5xl font-extrabold">Applications are closed</h1><p className="mt-5 text-lg text-white/70">We are not accepting applications right now. Please check back later.</p></main> : <Suspense><ApplyForm /></Suspense>}</>); }
