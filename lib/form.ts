@@ -56,7 +56,7 @@ export const applicationSchema = S.superRefine((d, c) => {
   if (isNaN(b)) bad("endDate", "Choose an end date"); else if (!isNaN(a) && b <= a) bad("endDate", "End date must be after the start date");
   if (!(d.role in ROLES)) bad("role", "Choose a role");
   if (!["3 Months", "6 Months"].includes(d.duration)) bad("duration", "Choose a duration");
-  if (d.offline !== "Yes") bad("offline", "This internship is offline, so you need to be able to work in person to apply.");
+  if (!["Offline", "Hybrid"].includes(d.offline)) bad("offline", "Choose an internship type");
   if (d.role in ROLES) {
     if (!d.tools.length) bad("tools", "Select at least one");
     if (!EXPERIENCE.includes(d.experience)) bad("experience", "Choose one option");

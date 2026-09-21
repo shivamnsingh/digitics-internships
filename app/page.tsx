@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic";
 const SOCIAL = [["Instagram", process.env.NEXT_PUBLIC_INSTAGRAM_URL], ["LinkedIn", process.env.NEXT_PUBLIC_LINKEDIN_URL], ["YouTube", process.env.NEXT_PUBLIC_YOUTUBE_URL]];
 const FAQ = [
   ["Is this internship paid?", "No. This is an unpaid internship. No stipend or monetary compensation is provided."],
-  ["Is it online or offline?", "Offline only. You need to be able to work from the Digitics office for the full internship."],
+  ["Is it offline or hybrid?", "You can choose an offline or hybrid internship. Hybrid interns work from the Digitics office and remotely, depending on project needs."],
   ["How long is it?", "You choose 3 months or 6 months when you apply."],
   ["Do I need experience or a degree?", "It's open to everyone with no age restriction. What matters is the quality of your work, so share your best portfolio or demo work."],
   ["Will I get a Letter of Recommendation?", "Not automatically. A Letter of Recommendation may be provided for exceptional performance and is not guaranteed."],
@@ -26,7 +26,7 @@ export default async function Home() {
     <main>
       <div className="spotlight"><section className="mx-auto grid max-w-6xl gap-12 px-5 pb-20 pt-14 lg:grid-cols-[1.1fr_1fr] lg:items-center lg:pt-24">
         <div>
-          <div className="mb-6 flex flex-wrap gap-2 text-sm"><span className="rounded-full bg-y px-4 py-1.5 font-bold text-black">UNPAID INTERNSHIP</span><span className="rounded-full border border-white/25 px-4 py-1.5">3 / 6 Month Offline Internship</span></div>
+          <div className="mb-6 flex flex-wrap gap-2 text-sm"><span className="rounded-full bg-y px-4 py-1.5 font-bold text-black">UNPAID INTERNSHIP</span><span className="rounded-full border border-white/25 px-4 py-1.5">3 / 6 Month Offline or Hybrid Internship</span></div>
           <h1 className="text-[clamp(3.4rem,10vw,7.5rem)] font-extrabold">Create.<br />Edit.<br />Design.<br /><span className="text-y">Grow.</span></h1>
           <p className="mt-7 max-w-lg text-lg text-white/80">Join Digitics as a creative intern and work on real-world projects in Video Editing or Graphic Design.</p>
           <p className="mt-3 max-w-lg text-white/50">Build real-world experience, strengthen your portfolio and work alongside a creative team.</p>
@@ -42,7 +42,7 @@ export default async function Home() {
       <section id="internship" className="mx-auto max-w-6xl scroll-mt-20 px-5 py-20">
         <h2 className="text-5xl font-extrabold sm:text-6xl">The internship, plainly.</h2>
         <div className="mt-10 grid gap-10 lg:grid-cols-2">
-          <dl className="divide-y divide-white/10 border-y border-white/10">{[["Type", "Offline"], ["Duration", "3 Months / 6 Months"], ["Compensation", "UNPAID"], ["Eligibility", "Open to everyone"], ["Age", "No age restriction"], ["Roles", "Video Editing / Graphic Designing"], ["Location", location]].map(([k, v]) => (
+          <dl className="divide-y divide-white/10 border-y border-white/10">{[["Type", "Offline or Hybrid"], ["Duration", "3 Months / 6 Months"], ["Compensation", "UNPAID"], ["Eligibility", "Open to everyone"], ["Age", "No age restriction"], ["Roles", "Video Editing / Graphic Designing"], ["Location", location]].map(([k, v]) => (
             <div key={k} className="flex justify-between gap-6 py-4"><dt className="text-white/50">{k}</dt><dd className={`text-right font-semibold ${v === "UNPAID" ? "rounded bg-y px-2 text-black" : ""}`}>{v}</dd></div>))}</dl>
           <div className="glass p-7"><h3 className="text-3xl font-bold">What you can receive</h3>
             <ol className="mt-5 space-y-4">{["Internship Certificate for every successfully completed intern", "College Internship/Completion Letter where your college requires it", "Letter of Recommendation for exceptional performance"].map((t, i) => <li key={t} className="flex gap-4"><span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-y text-sm font-bold text-black">{i + 1}</span>{t}</li>)}</ol>
@@ -79,7 +79,7 @@ export default async function Home() {
         <div className="mt-8 divide-y divide-white/10 border-y border-white/10">{FAQ.map(([q, a]) => <details key={q} className="group py-5"><summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-lg font-semibold marker:hidden"><span>{q}</span><span className="text-2xl text-y transition group-open:rotate-45">+</span></summary><p className="mt-3 max-w-xl text-white/65">{a}</p></details>)}</div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-5 pb-24"><div className="rounded-3xl bg-y p-10 text-black sm:p-16"><h2 className="text-5xl font-extrabold sm:text-7xl">Ready to make something?</h2><p className="mt-4 max-w-md font-medium">It's an unpaid, offline internship. Applying takes about ten minutes.</p><div className="mt-8"><Link href="/apply" className="btn bg-black text-white hover:bg-white hover:text-black"><span id="footer-apply">Apply for Internship</span></Link></div></div></section>
+      <section className="mx-auto max-w-6xl px-5 pb-24"><div className="rounded-3xl bg-y p-10 text-black sm:p-16"><h2 className="text-5xl font-extrabold sm:text-7xl">Ready to make something?</h2><p className="mt-4 max-w-md font-medium">It's an unpaid, offline or hybrid internship. Applying takes about ten minutes.</p><div className="mt-8"><Link href="/apply" className="btn bg-black text-white hover:bg-white hover:text-black"><span id="footer-apply">Apply for Internship</span></Link></div></div></section>
     </main><FloatingApply />
     <footer className="border-t border-white/10"><div className="mx-auto grid max-w-6xl gap-8 px-5 py-12 md:grid-cols-[1fr_auto_auto]">
       <div><Logo h={44} /><p className="display mt-5 text-2xl font-bold">Create. Edit. Design. Grow.</p></div>

@@ -39,7 +39,7 @@ async function fillEducation(page: Page) {
 async function fillPreference(page: Page, role: "Video Editing" | "Graphic Designing") {
   await choose(page, role);
   await choose(page, "3 Months");
-  await choose(page, "Yes");
+  await choose(page, "Offline");
 }
 
 async function fillSkills(page: Page, role: "Video Editing" | "Graphic Designing", validFile = false) {
@@ -93,7 +93,7 @@ test("role switching clears old answers and changes role questions", async ({ pa
   await page.getByRole("button", { name: "Continue" }).click();
   await choose(page, "Video Editing");
   await choose(page, "3 Months");
-  await choose(page, "Yes");
+  await choose(page, "Offline");
   await page.getByRole("button", { name: "Continue" }).click();
   await toggle(page, "Adobe Premiere Pro");
   await page.getByRole("button", { name: "Back" }).click();
@@ -103,7 +103,7 @@ test("role switching clears old answers and changes role questions", async ({ pa
   await expect(page.locator("label.chip").filter({ hasText: "Adobe Premiere Pro" })).toHaveCount(0);
 });
 
-test("required errors focus the first error and offline No blocks Continue", async ({ page }) => {
+test("required errors focus the first error and hybrid is available", async ({ page }) => {
   await page.goto("/apply");
   await page.getByRole("button", { name: "Continue" }).click();
   await expect(page.locator("#fullName")).toBeFocused();
@@ -113,9 +113,9 @@ test("required errors focus the first error and offline No blocks Continue", asy
   await page.getByRole("button", { name: "Continue" }).click();
   await choose(page, "Video Editing");
   await choose(page, "3 Months");
-  await choose(page, "No");
-  await expect(page.getByText(/takes place in person/)).toBeVisible();
-  await expect(page.getByRole("button", { name: "Continue" })).toBeDisabled();
+  await choose(page, "Hybrid");
+  await expect(page.getByText(/work both from the Digitics office and remotely/)).toBeVisible();
+  await expect(page.getByRole("button", { name: "Continue" })).toBeEnabled();
 });
 
 test("invalid portfolio and file types are rejected while optional portfolio is accepted", async ({ page }) => {

@@ -70,8 +70,8 @@ export default function ApplyForm() {
       {field("Expected internship start date", "startDate", <input id="startDate" type="date" min={today} className="input" value={v.startDate} onChange={(x) => set("startDate", x.target.value)} />)}{field("Expected internship end date", "endDate", <input id="endDate" type="date" min={v.startDate || today} className="input" value={v.endDate} onChange={(x) => set("endDate", x.target.value)} />)}</div>,
     <div key="2" className="space-y-7">{one("role", "Which role are you applying for?", Object.values(ROLES), (o) => { pickRole(Object.keys(ROLES)[Object.values(ROLES).indexOf(o as never)]); clearFiles(); })}
       {/* radios show labels; value maps back to role key */}
-      {one("duration", "Preferred internship duration?", ["3 Months", "6 Months"])}{one("offline", "Are you comfortable with an offline internship?", ["Yes", "No"])}
-      {v.offline === "No" && <div role="alert" className="rounded-xl border border-red-400/50 bg-red-400/10 p-4 text-sm">This internship is <b>offline</b> and takes place in person at the Digitics office. Because it can't be done remotely, we can't take your application forward. If your situation changes, you're welcome to come back.</div>}</div>,
+      {one("duration", "Preferred internship duration?", ["3 Months", "6 Months"])}{one("offline", "Which type of internship do you prefer?", ["Offline", "Hybrid"])}
+      {v.offline === "Hybrid" && <p className="rounded-xl border border-y/40 bg-y/10 p-4 text-sm text-y">Hybrid interns work both from the Digitics office and remotely, depending on project needs.</p>}</div>,
     Q ? <div key="3" className="space-y-7">{many("tools", Q.toolsL, Q.tools)}{one("experience", Q.expL, EXPERIENCE)}
       <div><fieldset><legend id="rating" tabIndex={-1} className="mb-2 text-sm font-semibold">{Q.skillL}</legend><div className="grid grid-cols-5 gap-2">{RATINGS.map((n, i) => <label key={n} className="chip flex-col !rounded-xl !px-1 text-center"><input type="radio" name="rating" className="sr-only" checked={v.rating === i + 1} onChange={() => set("rating", i + 1)} /><b className="text-lg">{i + 1}</b><span className="text-[11px] leading-tight">{n}</span></label>)}</div></fieldset>{e.rating && <p role="alert" className="mt-1.5 text-sm text-red-400">{e.rating}</p>}</div>
       {many("types", Q.typesL, Q.types)}{one("client", "Have you worked on real/client projects before?", ["Yes", "No"])}{v.client === "Yes" && area("clientDesc", "Briefly describe the project(s).", 3)}
@@ -89,14 +89,14 @@ export default function ApplyForm() {
   if (!ready) return <div className="mx-auto max-w-2xl px-5 pb-32 pt-10" aria-busy="true"><p className="text-white/60">Loading your saved application...</p></div>;
   return (<div className="mx-auto max-w-2xl scroll-pb-32 px-5 pb-[calc(8rem+env(safe-area-inset-bottom))] pt-10">
     <h1 className="text-5xl font-extrabold sm:text-6xl">Apply to Digitics</h1>
-    <p className="mt-3 text-white/60">Unpaid · Offline · 3 or 6 months</p>
+    <p className="mt-3 text-white/60">Unpaid · Offline or Hybrid · 3 or 6 months</p>
     <ol className="mt-8 flex gap-1.5" aria-label="Progress">{STEPS.map((s, i) => <li key={s} className="flex-1" aria-current={i === step ? "step" : undefined}><div className={`h-1.5 rounded-full transition-colors ${i <= step ? "bg-y" : "bg-white/15"}`} /><span className={`mt-2 hidden text-xs sm:block ${i === step ? "text-y" : "text-white/40"}`}>{String(i + 1).padStart(2, "0")} {s}</span></li>)}</ol>
     <p className="mt-3 text-sm text-y sm:hidden">Step {step + 1} of 6 · {STEPS[step]}</p>
     {restored && step > 0 && <p className="mt-4 rounded-lg bg-white/5 px-4 py-2 text-sm text-white/70">We restored your saved answers. Sample files need to be re-attached.</p>}
     <div className="mt-8 min-h-[16rem]">{body[step]}</div>
     <div className="fixed inset-x-0 bottom-0 z-20 border-t border-white/10 bg-black/85 pb-[env(safe-area-inset-bottom)] backdrop-blur-lg"><div className="mx-auto flex min-h-16 max-w-2xl justify-between gap-3 px-5 py-3">
       <button type="button" onClick={back} disabled={step === 0 || busy} className="btn-o">Back</button>
-      {step < 5 ? <button type="button" onClick={next} disabled={step === 2 && v.offline === "No"} className="btn-y flex-1 sm:flex-none">Continue</button>
+      {step < 5 ? <button type="button" onClick={next} className="btn-y flex-1 sm:flex-none">Continue</button>
         : <button type="button" onClick={submit} disabled={busy} className="btn-y flex-1 sm:flex-none">{busy ? "Submitting your application..." : "Submit Application"}</button>}</div></div>
   </div>);
 }
